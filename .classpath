@@ -3,5 +3,27 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/HTMLunit"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/cssparser-0.9.18.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/htmlunit-2.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/htmlunit-core-js-2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/jetty-io-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/jetty-util-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/nekohtml-1.9.22.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/serializer-2.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/websocket-api-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/websocket-client-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/websocket-common-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/xalan-2.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Garrett/Desktop/htmlunit-2.19/lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
