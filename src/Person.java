@@ -6,18 +6,19 @@
  * @author Will
  *
  */
-/* Garrett was here */
+
 
 
 public  class Person {
-	String fName;
-	String lName;
-	String email;
-	String country = "UnitedStates";
-	String address;
-	String zip;
+	private String fName;
+	private String lName;
+	private String email;
+	private String country;
+	private String address;
+	private String zip;
 	
-	public Person(	String fName,
+	
+	public Person (String fName,
 					String lName,
 					String email,
 					String address,
@@ -27,7 +28,7 @@ public  class Person {
 		this.fName = fName;
 		this.zip = zip;
 		this.email = email;
-
+		this.country = "UnitedStates";
 	}
 	
 	public void update (String fName,

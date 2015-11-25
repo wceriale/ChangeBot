@@ -29,29 +29,35 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 public  class FakePeople extends Thread {
 	
-	int numberOfPeople;
-	static int count;
-	//static List<Person> listOfFakePeople;
+	private int numberOfPeople;
+	private static int count;
+	private static List<Person> listOfFakePeople;
 	
-	public FakePeople(int numb) {
-		this.numberOfPeople = numb;	
+	public FakePeople(int numberOfPeople) {
+		this.numberOfPeople = numberOfPeople;
+		if(listOfFakePeople == null) {
+			listOfFakePeople = new ArrayList<Person>();
+		}
 	}
 	
 	public void run() {
-//		for(int i = 0; i < lines.length; i++) {
-//			System.out.println(lines[i]);
-//		}
-//		System.out.print(this.getName() + " is done");
-//		this.interrupt();
-		
+
 		WebClient webClient = new WebClient();
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
-		HtmlPage page;
+		HtmlPage page = null;
 		List<Person> people = new ArrayList<Person>();
 		try {
 			page = webClient.getPage("http://www.fakenamegenerator.com");
+		} catch (FailingHttpStatusCodeException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    if(page != null) {
 			for(int i = 0; i < this.numberOfPeople; i++) { 
+				//sometimes can throw IndexOutOfBoundsException, I guess it happens if
+				// getByXPath returns an empty whatever it is returning. -g
 				HtmlHeading3 webName = (HtmlHeading3) page.getByXPath("//div[@class='info']//div//div//h3").get(0);
+				
 		        String name = webName.getTextContent().trim();
 		        String[] fullName = name.split("\\s+");
 		        
@@ -78,24 +84,7 @@ public  class FakePeople extends Thread {
 				HtmlDefinitionDescription webEmail = (HtmlDefinitionDescription) page.getByXPath("//div[@class='extra']//dl//dd").get(8);
 				String email = (webEmail.getTextContent().split("\\s+")[0]);
 				
-				System.out.println(count + " people done");
-				count++;
 				
-				
-//				//listOfFakePeople.add(new Person (
-//								fName,
-//								lName,
-//								email,
-//								address,
-//								zipCode
-						//));
-				people.add(new Person (
-						fName,
-						lName,
-						email,
-						address,
-						zipCode
-				));
 				
 				Person target = new Person (
 						fName,
@@ -105,11 +94,14 @@ public  class FakePeople extends Thread {
 						zipCode
 				);
 				
+				listOfFakePeople.add(target);
+				people.add(target);
+				
 				System.out.println(target);
 				
+				count++;
+				System.out.println(count + " people done");
 				
-		        
-		        
 		        HtmlForm form = page.getForms().get(0);
 		        HtmlSubmitInput button = form.getInputByValue("Generate");
 
@@ -120,9 +112,6 @@ public  class FakePeople extends Thread {
 					e.printStackTrace();
 				}
 			}
-		} catch (FailingHttpStatusCodeException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 //		System.out.println(people);
 //		System.out.println(this.getName() + " is done");
@@ -130,30 +119,38 @@ public  class FakePeople extends Thread {
 		
 	}
 	
-	public  String cutAdd(String s) {
+	private String cutAdd(String s) {
 		if(s.length() > 2) {
-			String r = "" + s.charAt(0);
-			int i = 1;
-			while(s.charAt(i) != Character.toUpperCase(s.charAt(i))) {
+			String result = "" + s.charAt(0);
+			for(int i = 1; s.charAt(i) != Character.toUpperCase(s.charAt(i)); i++) {
 				if(s.length() == i + 1)
 					return s;
-				r += s.charAt(i);
-				i++;
+				result += s.charAt(i);
 			}
-			return r;
+			/* int i = 1;
+			 * while(s.charAt(i) != Character.toUpperCase(s.charAt(i))) {
+				if(s.length() == i + 1)
+					return s;
+				result += s.charAt(i);
+				i++;
+			}*/
+			return result;
 		} else {
 			return s;
 		}
 	}
 	
-	public boolean containsUpp(String s) {
-		boolean r = false;
+	private boolean containsUpp(String s) {
+		// pretty sure this works, let me know -g
+		//return !s.toLowerCase().equals(s);
+		
 		for(int i = 1; i < s.length(); i ++) {
 			if(s.charAt(i) == Character.toUpperCase(s.charAt(i))) {
 				return true;
 			}
 		}
-		return r;
+		return false;
+		
 		
 	}
 }
