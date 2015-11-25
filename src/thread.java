@@ -4,6 +4,8 @@ import java.io.*;
 
 public class thread {
 	public static void main(String[] args) {
+		long startTime = System.nanoTime();
+
 		// Remove Annoying Output
 		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF); 
 		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
@@ -29,11 +31,34 @@ public class thread {
 //				Person pers = new Person(lines[i]);
 //				pers.start();
 //			}
-			for(int i = 0; i < 100; i++) {
-				FakePeople pers = new FakePeople(3);
+			int processors = Runtime.getRuntime().availableProcessors();
+			System.out.println(processors + " Processors Available");
+			Thread[] threads = new Thread[processors]; 
+			for(int i = 0; i < processors; i++) {
+				FakePeople pers = new FakePeople(6);
+				threads[i] = pers;
 				pers.start();
 			}
 			
+			// Waits for all threads to finish
+			for(int i = 0; i < threads.length; i++)
+				try {
+					threads[i].join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			System.out.println(FakePeople.listOfFakePeople);
+			
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+
+			
+			long endTime = System.nanoTime();
+			System.out.println("Took "+(endTime - startTime) + " ns"); 
 			
 			
 //		} catch(FileNotFoundException e) {
