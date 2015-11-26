@@ -27,15 +27,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlHeading3;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
-public class FakePeople extends Thread {
+public class FakePeople implements Runnable {
 
 	private int numberOfPeople;
 	public static List<Person> listOfFakePeople;
 	// Needs to be public so our main can access
 
 	// Takes number of fake people to generate
-	public FakePeople(int numb) {
-		this.numberOfPeople = numb;
+	public FakePeople(int numberOfPeople) {
+		this.numberOfPeople = numberOfPeople;
 		listOfFakePeople = new ArrayList<Person>();
 	}
 
@@ -99,8 +99,9 @@ public class FakePeople extends Thread {
 				String email = (webEmail.getTextContent().split("\\s+")[0]);
 
 				// Adds person to static list and local list
-				listOfFakePeople.add(new Person(fName, lName, email, address, zipCode));
-				people.add(new Person(fName, lName, email, address, zipCode));
+				Person target = new Person(fName, lName, email, address, zipCode);
+				listOfFakePeople.add(target);
+				people.add(target);
 
 				// DEBUGGING CODE
 				//
@@ -128,7 +129,8 @@ public class FakePeople extends Thread {
 		// System.out.println(this.getName() + " is done");
 
 		// Stops the thread from continuing
-		this.interrupt();
+		// ^ Not necessarily true, doesn't end immediately
+		return;
 
 	}
 
@@ -137,9 +139,8 @@ public class FakePeople extends Thread {
 	private String cutAdd(String s) {
 		if (s.length() > 2) {
 			String result = "" + s.charAt(0);
-			for (int i = 1; s.charAt(i) != Character.toUpperCase(s.charAt(i)); i++) {
-				if (s.length() == i + 1)
-					return s;
+			for (int i = 1; i < s.length() && 
+					s.charAt(i) != Character.toUpperCase(s.charAt(i)); i++) {
 				result += s.charAt(i);
 			}
 			return result;
