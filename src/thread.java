@@ -27,6 +27,8 @@ public class thread {
 		System.out.println(NUM_THREADS + " Processors Available");
 		
 		int peopleWanted = promptForPeople();
+		PrintWriter out = promptForOutput();
+		
 		long startTime = System.nanoTime(); // Starting Time
 		
 		// needed to test if all threads have ended
@@ -71,6 +73,8 @@ public class thread {
 		// Prints all people at the very end :D
 		System.out.println(FakePeople.listOfFakePeople);
 		
+		
+		
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -80,9 +84,38 @@ public class thread {
 		// Timestamp of how long processing took in seconds
 		double timeElapsed = (endTime - startTime) / 1000000000.0;
 		System.out.println("Took " + timeElapsed + " seconds"); 
+		
+		
+		// Writing to output file
+		out.println("Took " + timeElapsed + " seconds for " + peopleWanted);
+		for(int i = 0; i < FakePeople.listOfFakePeople.size(); i++) {
+			out.println(FakePeople.listOfFakePeople.get(i));
+			out.println();
+		}
+		
+		
+		out.close();
 
 	}
 	
+	// Prompts user for output file name
+	// Adds .txt to the end
+	// Returns printWriter for given file
+	private static PrintWriter promptForOutput() {
+		// TODO Auto-generated method stub
+		Scanner console = new Scanner(System.in);
+		System.out.println("This will be created in the same directory as this program");
+		System.out.println("Name of File for output? (.txt will be added)" );
+		String file = console.nextLine();
+		try {
+			return new PrintWriter(new File(file + ".txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	// prompts user for number of people to generate
 	// and returns it.
 	// 
@@ -107,4 +140,5 @@ public class thread {
 		}
 		return people;
 	}
+	
 }

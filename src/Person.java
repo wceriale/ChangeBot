@@ -31,7 +31,7 @@ public  class Person {
 		this.fName = fName;
 		this.zip = zip;
 		this.email = email;
-		this.country = "UnitedStates";
+		this.country = "United States";
 	}
 	
 	// Updates values
